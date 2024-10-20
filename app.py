@@ -26,6 +26,28 @@ def index():
            <footer>Безделов Роман Артемович, ФБИ-22, 3 курс, 2024</footer>
         </html>''', 200
 
+@app.route('/lab1')
+def lab1():
+    style = url_for("static", filename = "lab1.css")
+    return '''<!doctype html>
+        <html>
+        <head>
+            <link rel = "stylesheet" href="''' + style +'''"
+            <title>Лабораторная 1</title>
+        </head>
+           <body>
+                <p>
+                    Flask — фреймворк для создания веб-приложений на языке
+                    программирования Python, использующий набор инструментов
+                    Werkzeug, а также шаблонизатор Jinja2. Относится к категории так
+                    называемых микрофреймворков — минималистичных каркасов
+                    веб-приложений, сознательно предоставляющих лишь самые базовые возможности.
+                </p>
+                <a href="/">Главная страница</a>
+           </body>
+           <footer>Безделов Роман Артемович, ФБИ-22, 3 курс, 2024</footer>
+        </html>''', 200
+
 @app.route('/lab1/web')
 def web():
     return """<!doctype html>
@@ -108,3 +130,22 @@ def created():
     </body>
 </html>
     ''', 201
+
+@app.route('/error/400')
+def error_400():
+    return 'Bad Request', 400
+@app.route('/error/401')
+def error_401():
+    return 'Unauthorized', 401
+@app.route('/error/402')
+def error_402():
+    return 'Payment Required', 402
+@app.route('/error/403')
+def error_403():
+    return 'Forbidden', 403
+@app.route('/error/405')
+def error_405():
+    return 'Method Not Allowed', 405
+@app.route('/error/418')
+def error_418():
+    return "I'm a teapot", 418
