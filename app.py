@@ -179,3 +179,38 @@ def internal_error(error):
     </body>
 </html>
 ''', 500
+
+@app.route('/stone')
+def heavy_metal():
+    path = url_for("static", filename = "stone.jpg")
+    style = url_for("static", filename = "lab1.css")
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <link rel = "stylesheet" href="''' + style +'''"
+        <meta charset="UTF-8">
+        <title>Камень не дам</title>
+    </head>
+    <body>
+        <h1>Плотину надо поднять.</h1>
+        <p>
+            Рычагом.
+        </p>
+        <p>
+            Я его дам.
+        </p>
+        <p>
+            Канал нужно завалить Камнем.
+        </p>
+        <p>
+            Камень я не дам.
+        </p>
+        <img src="''' + path + '''" alt="Stone">
+    </body>
+</html>
+''', 200, {
+    'Content-Language': 'ru',
+    'X-Custom-Header-1': 'Stone',
+    'X-Custom-Header-2': 'Reptilia'
+}
