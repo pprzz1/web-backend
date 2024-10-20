@@ -4,7 +4,19 @@ app = Flask(__name__)
 
 @app.errorhandler(404)
 def not_found(err):
-    return "нет такой страницы", 404
+      path = url_for("static", filename = "404.jpg")
+      style = url_for("static", filename = "lab1.css")
+      return '''
+<!doctype html>
+<html>
+<head>
+    <link rel = "stylesheet" href="''' + style +'''"
+</head>
+    <body>
+        <img src="''' + path + '''" class="full-screen-image">
+    </body>
+</html>
+''', 404
 
 @app.route('/')
 @app.route('/index')
@@ -86,7 +98,7 @@ def oak():
         <head><link href="''' + style + '''" rel="stylesheet"></head>
             <body>
                 <h1>Дуб</h1>
-                <img src="''' + path + '''">
+                <img src="''' + path + '''" class="oak-image">
             </body>
         </html>
         ''' 

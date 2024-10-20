@@ -1,6 +1,24 @@
-img {
-    width: 1980;
-    height: 1020;
+.full-screen-image {
+    width: 900px;
+    height: 500px;
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    position: relative;
+    left: 530px;
+    top: 150px;
+    background-color: black;
+}
+
+.oak-image {
+    width: 800px;
+    height: 600px;
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+    position: relative;
+    left: 550px;
+    top: 100px;
 }
 
 body {
