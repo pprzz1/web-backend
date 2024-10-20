@@ -5,4 +5,28 @@ img {
 
 body {
     background-color: bisque;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+header {
+    background-color:rgb(20, 153, 163);
+    color: black;
+    font-family:'Times New Roman', Times, serif;
+    font-size: 22px;
+    font-style: italic;
+    margin: 0px;
+}
+
+footer {
+    background-color: rgb(20, 153, 163);
+    color: black;
+    font-family:'Times New Roman', Times, serif;
+    margin: 0px;
+    text-align: right;
+    font-style: italic;
+    font-size: 22px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
