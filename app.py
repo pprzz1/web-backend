@@ -369,3 +369,15 @@ books = [
 @app.route('/lab2/books')
 def show_books():
     return render_template('books.html', books=books)
+
+objects = [
+    {"name": "Toyota Camry", "description": "Седан среднего класса с высоким уровнем комфорта и надежности.", "image": "toyota-camry.jpg"},
+    {"name": "Honda Civic", "description": "Компактный седан с экономичным двигателем и современным дизайном.", "image": "honda-civic.jpg"},
+    {"name": "Ford Mustang", "description": "Классический американский спорткар с мощным двигателем и агрессивным внешним видом.", "image": "ford-mustang.jpg"},
+    {"name": "Tesla Model S", "description": "Электромобиль премиум-класса с высокой автономностью и передовыми технологиями.", "image": "tesla-model-s.jpg"},
+    {"name": "BMW X5", "description": "Полноразмерный кроссовер с роскошным интерьером и высокими динамическими характеристиками.", "image": "bmw-x5.jpg"}
+]
+
+@app.route('/lab2/objects')
+def show_objects():
+    return render_template('objects.html', objects=objects)

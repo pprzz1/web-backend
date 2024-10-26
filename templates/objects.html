@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{# номер лабы #}
+{% block lab %}Лабораторная работа 2{% endblock %}
+
+{# основной контент #}
+{% block main %}
+<head>
+    <title>Список объектов</title>
+</head>
+<body>
+    <h1>Список объектов</h1>
+    <div style="display: flex; flex-wrap: wrap;">
+        {% for obj in objects %}
+        <div>
+            <h2>{{ obj.name }}</h2>
+            <p>{{ obj.description }}</p>
+            <img src="{{ url_for('static', filename=obj.image) }}" alt="{{ obj.name }}" style="width: 100%;">
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
