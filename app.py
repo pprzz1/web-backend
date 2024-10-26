@@ -253,6 +253,7 @@ def flowers(flower_id):
     else:
         return 'цветок: ' + flower_list[flower_id]
     
+# Добавление нового цветка
 @app.route('/lab2/add_flower/<string:name>')
 def add_flower(name):
     flower_list.append(name)
@@ -265,6 +266,40 @@ def add_flower(name):
     <p>Всего цветов: {len(flower_list)} </p>
     <p>Полный список: {flower_list} </p>
     </body>
+</html>
+'''
+
+@app.route('/lab2/add_flower/')
+def add_flower_no_name():
+    return "вы не задали имя цветка", 400
+
+@app.route('/lab2/all_flowers')
+def all_flowers():
+    return f'''
+<!doctype html>
+<html>
+<body>
+    <h1>Все цветы</h1>
+    <p>Всего цветов: {len(flower_list)}</p>
+    <ul>
+        {"".join([f"<li>{flower}</li>" for flower in flower_list])}
+    </ul>
+</body>
+</html>
+'''
+
+@app.route('/lab2/clear_flowers')
+def clear_flowers():
+    global flower_list
+    flower_list = []
+    all_flowers_link = url_for('all_flowers')
+    return f'''
+<!doctype html>
+<html>
+<body>
+    <h1>Список цветов очищен</h1>
+    <a href="{all_flowers_link}">Посмотреть все цветы</a>
+</body>
 </html>
 '''
 
