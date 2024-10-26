@@ -235,3 +235,11 @@ def heavy_metal():
     'X-Custom-Header-1': 'Stone',
     'X-Custom-Header-2': 'Reptilia'
 }
+
+@app.route('/lab2/a')
+def a():
+    return 'без слэша'
+
+@app.route('/lab2/a/')
+def a2():
+    return 'со слэшем'
