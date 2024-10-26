@@ -34,6 +34,8 @@ def index():
            </header>
            <body>
                 <a href='/lab1'>Первая лабораторная</a>
+                <br>
+                <a href='/lab2'>Вторая лабораторная</a>
            </body>
            <footer>Безделов Роман Артемович, ФБИ-22, 3 курс, 2024</footer>
         </html>''', 200
@@ -202,7 +204,7 @@ def internal_error(error):
 ''', 500
 
 @app.route('/stone')
-def heavy_metal():
+def stone():
     path = url_for("static", filename = "stone.jpg")
     style = url_for("static", filename = "lab1.css")
     return '''
