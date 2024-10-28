@@ -1,10 +1,10 @@
-from flask import Flask, url_for, redirect, render_template
+from flask import Blueprint, url_for, redirect
 
-app = Flask(__name__)
+lab1 = Blueprint('lab1', __name__)
 
 
-@app.route('/lab1')
-def lab1():
+@lab1.route('/lab1')
+def lab():
     style = url_for("static", filename = "lab1.css")
     return '''<!doctype html>
         <html>
@@ -22,8 +22,6 @@ def lab1():
                 </p>
                 <a href="/">Главная страница</a>
                 <h2>Список роутов</h2>
-                <ul>
-                    <li><a href="/lab1">Первая лабораторная</a></li>
                     <li><a href="/lab1/web">Web</a></li>
                     <li><a href="/lab1/author">Автор</a></li>
                     <li><a href="/lab1/oak">Дуб</a></li>
@@ -31,12 +29,6 @@ def lab1():
                     <li><a href="/lab1/reset_counter">Сброс счетчика</a></li>
                     <li><a href="/lab1/info">Информация</a></li>
                     <li><a href="/lab1/created">Создано успешно</a></li>
-                    <li><a href="/error/400">Ошибка 400</a></li>
-                    <li><a href="/error/401">Ошибка 401</a></li>
-                    <li><a href="/error/402">Ошибка 402</a></li>
-                    <li><a href="/error/403">Ошибка 403</a></li>
-                    <li><a href="/error/405">Ошибка 405</a></li>
-                    <li><a href="/error/418">Ошибка 418</a></li>
                     <li><a href="/trigger_error">Триггер ошибки</a></li>
                     <li><a href="/lab1/stone">Камень</a></li>
                 </ul>
@@ -44,7 +36,8 @@ def lab1():
            <footer>Безделов Роман Артемович, ФБИ-22, 3 курс, 2024</footer>
         </html>''', 200
 
-@app.route('/lab1/web')
+
+@lab1.route('/lab1/web')
 def web():
     return """<!doctype html>
         <html>
@@ -56,23 +49,24 @@ def web():
             'Content-type': 'text/plain; charset=utf-8'
         }
 
-@app.route('/lab1/author')
+
+@lab1.route('/lab1/author')
 def author():
     name = "Безделов Рома Артемович"
     group = "ФБИ-22"
-    faculty = "ФБ"
-    
+    faculty = "ФБ" 
     return """<!doctype html>
         <html>
             <body>
                 <p>Студент: """ + name + """</p>
                 <p>Группа: """ + group + """</p>
                 <p>Факультет: """ + faculty + """</p>
-                <a href="/web">web</a>
+                <a href="/lab1">Главная страница</a>
             </body>
         </html>"""
 
-@app.route("/lab1/oak")
+
+@lab1.route("/lab1/oak")
 def oak():
     path = url_for("static", filename="oak.jpg")
     style = url_for("static", filename='lab1.css')
@@ -89,11 +83,11 @@ def oak():
 
 count = 0
 
-@app.route('/lab1/counter')
+@lab1.route('/lab1/counter')
 def counter():
     global count
     count += 1
-    reset_link = url_for('reset_counter')   
+    reset_link = url_for('lab1.reset_counter')   
     return '''
 <!doctype html>
 <html>
@@ -105,17 +99,20 @@ def counter():
 </html>
     '''
 
-@app.route('/lab1/reset_counter')
+
+@lab1.route('/lab1/reset_counter')
 def reset_counter():
     global count
     count = 0
-    return redirect(url_for('counter'))
+    return redirect(url_for('lab1.counter'))
 
-@app.route('/lab1/info')
+
+@lab1.route('/lab1/info')
 def info():
     return redirect('/lab1/author')
 
-@app.route("/lab1/created")
+
+@lab1.route("/lab1/created")
 def created():
     return '''
 <!doctype html>
@@ -127,30 +124,13 @@ def created():
 </html>
     ''', 201
 
-@app.route('/error/400')
-def error_400():
-    return 'Bad Request', 400
-@app.route('/error/401')
-def error_401():
-    return 'Unauthorized', 401
-@app.route('/error/402')
-def error_402():
-    return 'Payment Required', 402
-@app.route('/error/403')
-def error_403():
-    return 'Forbidden', 403
-@app.route('/error/405')
-def error_405():
-    return 'Method Not Allowed', 405
-@app.route('/error/418')
-def error_418():
-    return "I'm a teapot", 418
 
-@app.route('/trigger_error')
+@lab1.route('/trigger_error')
 def trigger_error():
     return 1 / 0
 
-@app.route('/lab1/stone')
+
+@lab1.route('/lab1/stone')
 def stone():
     path = url_for("static", filename = "stone.jpg")
     style = url_for("static", filename = "lab1.css")
