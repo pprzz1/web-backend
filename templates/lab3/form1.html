@@ -23,19 +23,21 @@
     <form>
         <label>Ваше имя:</label>
         <div>
-            <input type="text" placeholder="как вас зовут?" name="user">
+            <input type="text" placeholder="как вас зовут?" name="user" value="{{ user or ''}}">
+            <span class="error">{{ errors.user }}</span>
         </div>
         
         <label>Ваш возраст:</label>
         <div>
-            <input type="number" placeholder="вам скок лет?" name="age">
+            <input type="number" placeholder="вам скок лет?" name="age" value="{{ age or 'age'}}">
+            <span class="error">{{ errors.age }}</span>
         </div>
 
         <label>Ваш пол:</label>
         <div>
             <select name='sex'>
-                <option value='male'>паркет</option>
-                <option value='female'>ламинат</option>
+                <option value='male' {{ sex == 'male' and selected }}>паркет</option>
+                <option value='female' {{ sex == 'female' and selected }}>ламинат</option>
             </select>
         </div>
 
