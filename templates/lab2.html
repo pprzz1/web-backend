@@ -7,16 +7,17 @@
 {% block main %}
     <h1>Вторая лабораторная</h1>
     <ul>
-        <li><a href="{{ url_for('a2') }}">Со слэшом</a></li>
-        <li><a href="{{ url_for('a') }}">Без слэша</a></li>
-        <li><a href="{{ url_for('show_books') }}">Список книг</a></li>
-        <li><a href="{{ url_for('show_objects') }}">Список объектов</a></li>
-        <li><a href="{{ url_for('calc', a=1, b=1) }}">Калькулятор</a></li>
-        <li><a href="{{ url_for('calc_default') }}">Калькулятор (по умолчанию)</a></li>
-        <li><a href="{{ url_for('calc_single_number', a=100500) }}">Калькулятор (одно число)</a></li>
-        <li><a href="{{ url_for('flowers', flower_id=0) }}">Цветы</a></li>
-        <li><a href="{{ url_for('all_flowers') }}">Все цветы</a></li>
-        <li><a href="{{ url_for('add_flower', name='Новый цветок') }}">Добавить цветок</a></li>
-        <li><a href="{{ url_for('clear_flowers') }}">Очистить список цветов</a></li>
+        <li><a href="{{ url_for('lab2.a2') }}">Со слэшом</a></li>
+        <li><a href="{{ url_for('lab2.a') }}">Без слэша</a></li>
+        <li><a href="{{ url_for('lab2.show_books') }}">Список книг</a></li>
+        <li><a href="{{ url_for('lab2.example') }}">Пример</a></li>
+        <li><a href="{{ url_for('lab2.show_objects') }}">Список объектов</a></li>
+        <li><a href="{{ url_for('lab2.calc', a=1, b=1) }}">Калькулятор</a></li>
+        <li><a href="{{ url_for('lab2.calc_default') }}">Калькулятор (по умолчанию)</a></li>
+        <li><a href="{{ url_for('lab2.calc_single_number', a=100500) }}">Калькулятор (одно число)</a></li>
+        <li><a href="{{ url_for('lab2.flowers', flower_id=0) }}">Цветы</a></li>
+        <li><a href="{{ url_for('lab2.all_flowers') }}">Все цветы</a></li>
+        <li><a href="{{ url_for('lab2.add_flower', name='Новый цветок') }}">Добавить цветок</a></li>
+        <li><a href="{{ url_for('lab2.clear_flowers') }}">Очистить список цветов</a></li>
     </ul>
 {% endblock %}
