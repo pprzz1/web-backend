@@ -105,3 +105,75 @@ def settings():
         font_size=font_size,
     ))
     return resp
+
+errors = {}
+@lab3.route('/lab3/ticket')
+def formTrain():
+    ticketcost = 0
+    fio = request.args.get('fio')
+    place = request.args.get('place')
+    linen = request.args.get('linen')
+    luggage = request.args.get('luggage')
+    age = request.args.get('age')
+    start = request.args.get('start')
+    end = request.args.get('end')
+    date = request.args.get('date')
+    insurance = request.args.get('insurance')
+
+    argsNames = [fio, age, start, end, date]
+
+    check = False
+
+    if fio == '':
+        errors['fio'] = 'Заполните поле!'
+    else:
+        errors['fio'] = ''
+
+    if age == '':
+        errors['age'] = 'Заполните поле!'
+    elif  type(age) == str and (int(age) < 0 or int(age) > 120):
+        errors['age'] = 'Возраст должен быть от 0 до 120 лет!'
+    else:
+        errors['age'] = ''
+
+    if start == '':
+        errors['start'] = 'Заполните поле!'
+    else:
+        errors['start'] = ''
+
+    if end == '':
+        errors['end'] = 'Заполните поле!'
+    else:
+        errors['end'] = ''
+
+    if date == '':
+        errors['date'] = 'Заполните поле!'
+    else:
+        errors['date'] = ''
+
+    if all(argsNames) and (int(age) >= 0 and int(age) <= 120):
+        check = True
+
+    if check == True:
+        if int(age) > 17:
+            ticketcost += 1000
+        else:
+            ticketcost += 700
+
+        if place == 'нижняя':
+            ticketcost += 100
+        elif place == 'нижняя боковая':
+            ticketcost += 100
+        
+        if linen is not None:
+            ticketcost += 75
+        
+        if luggage is not None:
+            ticketcost += 250
+        
+        if insurance is not None:
+            ticketcost += 150
+        
+    return render_template('lab3/ticket.html', fio=fio, place=place, linen=linen, luggage=luggage,
+                        age=age, start=start, end=end, date=date, insurance=insurance, errors=errors,
+                        argsNames=argsNames, check=check, ticketcost=ticketcost)
