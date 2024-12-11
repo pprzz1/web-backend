@@ -4,8 +4,13 @@
 
 {% block main %}
     <h1>Статьи</h1>
-    {% for article in articles %}
-        <h2>{{ article['title'] }}</h2>
-        <blockquote>{{ article['article_text'] }}</blockquote>
-    {% endfor %}
+    {% if articles %}
+        {% for article in articles %}
+            <h2 class="article-title">{{ article['title'] }}</h2>
+            <blockquote class="article-text">{{ article['article_text'] }}</blockquote>
+        {% endfor %}
+    {% else %}
+        <h2 class="article-title">У вас пока нет статей!</h2>
+        <blockquote class="article-text"><a href="/lab5/create">Напишите первую статью</a>!</blockquote>
+    {% endif %}
 {% endblock %}
