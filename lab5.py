@@ -15,8 +15,8 @@ def db_connect():
     if current_app.config['DB_TYPE'] == 'postgres':
             conn = psycopg2.connect(
                 host='127.0.0.1',
-                database='alina_perevyazko_knowledge_base',
-                user='alina_perevyazko_knowledge_base',
+                database='roma_bezdelov_knowledge_base',
+                user='roma_bezdelov_knowledge_base',
                 password='123'
             )
             cur = conn.cursor(cursor_factory=RealDictCursor)
