@@ -27,6 +27,8 @@
                 mounthlyPriceCounter = 0; 
                 office_list.forEach(office => {
                     const li = document.createElement('li');
+                    li.classList.add('office-item'); 
+
                     if (office.tenant) {
                         li.innerText = `${office.number}: Занят`;
                         if (office.tenant === currentUser) {
@@ -35,23 +37,32 @@
                     } else {
                         li.innerText = `${office.number}: Свободен`;
                     }
+
                     const bookingButton = document.createElement('button');
                     bookingButton.innerText = 'Забронировать';
+                    bookingButton.classList.add('room-action'); 
                     bookingButton.onclick = () => booking(office.number);
                     li.appendChild(bookingButton);
+
                     if (office.tenant) {
                         const cancelButton = document.createElement('button');
                         cancelButton.innerText = 'Освободить';
+                        cancelButton.classList.add('room-action'); 
                         cancelButton.onclick = () => cancelBooking(office.number);
                         li.appendChild(cancelButton);
                     }
+
                     const price = document.createElement('span');
                     price.innerText = `${office.price} Руб./мес.`;
+                    price.classList.add('room-price'); 
                     li.appendChild(price);
+
                     ul.appendChild(li);
                 });
+
                 const mountly_price = document.getElementById('mountly-price');
                 mountly_price.innerHTML = `Ваша арендная плата: ${mounthlyPriceCounter} Руб./мес.`;
+                mountly_price.classList.add('rent-info'); 
             });
         }
 
