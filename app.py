@@ -5,6 +5,8 @@ from lab3 import lab3
 from lab4 import lab4
 from lab5 import lab5
 from lab6 import lab6
+from lab7 import lab7
+
 import os
 
 app = Flask(__name__)
@@ -18,6 +20,7 @@ app.register_blueprint(lab3)
 app.register_blueprint(lab4)
 app.register_blueprint(lab5)
 app.register_blueprint(lab6)
+app.register_blueprint(lab7)
 
 @app.errorhandler(404)
 def not_found(err):
@@ -61,6 +64,8 @@ def index():
                 <a href='/lab5'>Пятая лабораторная</a>
                 <br>
                 <a href='/lab6'>Шестая лабораторная</a>
+                <br>
+                <a href="/lab7">Седьмая лабораторная</a>
            </body>
            <footer>Безделов Роман Артемович, ФБИ-22, 3 курс, 2024</footer>
         </html>''', 200
