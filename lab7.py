@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort
+from flask import Blueprint, render_template, abort, request
 from random import randint
 
 import psycopg2
@@ -77,3 +77,22 @@ def del_film(id):
     else:
         del films[id]
         return '', 204
+    
+
+lab7.route('/lab7/rest-api/films/<int:id>', methods=['PUT'])
+def put_film(id):
+    if id >= len(films):
+        return abort(404)
+    else:
+        film = request.get_json()
+        films[id] = film
+        return films[id]
+    
+@lab7.route('/lab7/rest-api/films/', methods=['POST'])
+def add_film():
+    film = request.get_json() 
+    if not film or not all(k in film for k in ('title', 'title_ru', 'year', 'description')):
+        return abort(400, "Invalid film data")  
+    
+    films.append(film) 
+    return {'id': len(films) - 1}, 201 
