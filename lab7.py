@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, abort, request
+from flask import Blueprint, render_template, abort, request, jsonify
 from random import randint
 
 import psycopg2
@@ -59,7 +59,7 @@ films = [
 
 @lab7.route('/lab7/rest-api/films/', methods=['GET'])
 def get_films():
-    return films
+    return jsonify(films)
 
 
 @lab7.route('/lab7/rest-api/films/<int:id>', methods=['GET'])
