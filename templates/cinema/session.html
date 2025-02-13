@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block lab %}Сеанс{% endblock %}
+
+{% block main %}
+    <h2>{{ session.title }}</h2>
+    <p>Дата: {{ session.date }} | Время: {{ session.time }}</p>
+
+    <h3>Выберите место</h3>
+    <form id="bookingForm">
+        <table border="1">
+            <tr>
+                {% for i in range(1, 31) %}
+                    {% if loop.index0 % 6 == 0 %}</tr><tr>{% endif %}
+                    <td id="seat-{{ i }}" class="seat" data-seat="{{ i }}" style="padding: 10px; text-align: center;">
+                        <input type="radio" name="seat_number" value="{{ i }}">
+                    </td>
+                {% endfor %}
+            </tr>
+        </table>
+        <button type="submit">Забронировать</button>
+    </form>
+
+    <a href="{{ url_for('cinema.index') }}">Назад</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            updateSeats(); // Обновляем места при загрузке страницы
+
+            document.getElementById("bookingForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Отмена стандартного обновления страницы
+
+                let selectedSeat = document.querySelector("input[name='seat_number']:checked");
+                if (!selectedSeat) {
+                    alert("Выберите место!");
+                    return;
+                }
+
+                let formData = new FormData();
+                formData.append("seat_number", selectedSeat.value);
+
+                fetch("{{ url_for('cinema.book_seat', session_id=session.id) }}", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("Место забронировано!");
+                        updateSeats(); // Обновляем занятые места без перезагрузки
+                    } else {
+                        alert("Ошибка: " + data.error);
+                    }
+                })
+                .catch(error => console.error("Ошибка:", error));
+            });
+        });
+
+        function updateSeats() {
+            fetch("{{ url_for('cinema.get_seats', session_id=session.id) }}")
+                .then(response => response.json())
+                .then(data => {
+                    document.querySelectorAll('.seat').forEach(td => {
+                        let seatNumber = td.dataset.seat;
+                        let input = td.querySelector("input[type='radio']");
+                        td.style.backgroundColor = ""; 
+                        td.innerHTML = `<input type="radio" name="seat_number" value="${seatNumber}">`; 
+
+                        data.forEach(seat => {
+                            if (seat.seat_number == seatNumber) {
+                                td.style.backgroundColor = "red";
+                                td.innerHTML = "Занято";
+                            }
+                        });
+                    });
+                });
+        }
+    </script>
+{% endblock %}

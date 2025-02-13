@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block lab %}Кинотеатр{% endblock %}
+
+{% block main %}
+    <h2>Доступные сеансы</h2>
+    <ul>
+        {% for session in sessions %}
+            <li>
+                <a href="{{ url_for('cinema.session_detail', session_id=session.id) }}">
+                    {{ session.title }} - {{ session.date }} {{ session.time }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if session.get('login') %}
+        <a href="{{ url_for('cinema.logout') }}">Выйти</a>
+    {% else %}
+        <a href="{{ url_for('cinema.login') }}">Войти</a>
+    {% endif %}
+
+    {% if session.get('is_admin') %}
+        <br>
+        <a href="{{ url_for('cinema.admin_panel') }}" style="color: red; font-weight: bold;">Админ-панель</a>
+    {% endif %}
+{% endblock %}
+
