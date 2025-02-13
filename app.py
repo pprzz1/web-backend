@@ -2,6 +2,8 @@ from flask import Flask, url_for, redirect, render_template
 import os
 from os import path
 from flask_sqlalchemy import SQLAlchemy
+from db.models import users
+from flask_login import LoginManager
 from db import db
 
 from lab1 import lab1
@@ -17,6 +19,13 @@ from lab8 import lab8
 
 app = Flask(__name__)
 
+login_manager = LoginManager()
+login_manager.login_view = 'lab8.login'
+login_manager.init_app(app)
+@login_manager.user_loader
+def load_users(login_id):
+    return users.query.get(int(login_id))
+
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'секретно-секретный секрет')
 app.config['DB_TYPE'] = os.getenv('DB_TYPE', 'postgres')
 
@@ -31,7 +40,7 @@ else:
     dir_path = path.dirname(path.realpath(__file__))
     db_path = path.join(dir_path, 'roma_bezdelov_orm.db')
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
-    
+
 db.init_app(app)
 
 app.register_blueprint(lab1)
