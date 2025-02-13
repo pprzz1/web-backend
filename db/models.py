@@ -1,22 +1,17 @@
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
+from . import db
 
-db = SQLAlchemy()
+class users(db.Model):
 
-class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
+    login = db.Column(db.String(30), nullable=False, unique=True)
+    password = db.Column(db.String(162), nullable=False)
 
-class MovieSession(db.Model):
+class articles(db.Model):
+    
     id = db.Column(db.Integer, primary_key=True)
-    movie_name = db.Column(db.String(100), nullable=False)
-    date = db.Column(db.String(20), nullable=False)
-    time = db.Column(db.String(10), nullable=False)
-
-class Booking(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    session_id = db.Column(db.Integer, db.ForeignKey('movie_session.id'))
-    seat_number = db.Column(db.Integer, nullable=False)
+    login_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    title = db.Column(db.String(50), nullable=False)
+    article_text = db.Column(db.Text, nullable=False)
+    is_favorite = db.Column(db.Boolean)
+    is_public = db.Column(db.Boolean)
+    likes = db.Column(db.Integer)
