@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{# номер лабораторной работы: #}
+{% block lab %} Лабораторная работа 9 {% endblock %}
+{# основной контент: #}
+{% block main %}
+<style>
+    img{
+        height: 400px;
+        margin-top: 20px;
+    }
+</style>
+<link rel="stylesheet" href="{{url_for('static', filename='/lab9/main9.css')}}">
+<h1>❄️Введите ваше имя❄️</h1>
+<form method="POST">
+    <input type="text" name="name" required placeholder="Ваше имя">
+    <button type="submit">Далее</button>
+</form>
+<img src="{{ url_for('static', filename='/lab9/tree.png') }}">
+{% endblock %}

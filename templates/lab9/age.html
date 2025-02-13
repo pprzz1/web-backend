@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block lab %} Ввод возраста {% endblock %}
+{% block main %}
+    <style>
+        img{
+            height: 400px;
+            margin-top: 20px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='/lab9/main9.css')}}">
+    <h1>Сколько Вам лет?</h1>
+    <form method="POST">
+        <input type="number" name="age" required placeholder="Ваш возраст">
+        <button type="submit">Далее</button>
+    </form>
+    <img src="{{ url_for('static', filename='/lab9/toy.png') }}">
+{% endblock %}

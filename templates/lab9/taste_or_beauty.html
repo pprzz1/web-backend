@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block lab %} Выбор между вкусное и красивое {% endblock %}
+{% block main %}
+    <style>
+    img{
+        height: 400px;
+        margin-top: 20px;
+        margin-left: 150px;
+    }
+    </style>
+    <h1>❄️Что вам больше нравится?❄️</h1>
+    <form method="POST">
+        <input type="radio" name="choice" value="вкусное" required> Что-то вкусное🍰
+        <input type="radio" name="choice" value="красивое" required> Что-то красивое💎 <br>
+        <button type="submit">Далее</button>
+    </form>
+    <img src="{{ url_for('static', filename='/lab9/box.png') }}">
+{% endblock %}
